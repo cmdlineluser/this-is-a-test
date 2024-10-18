@@ -1,6 +1,7 @@
 import datetime
 import tempfile
 import polars as pl
+from pathlib import Path
 
 expected = {'date_of_birth': [datetime.date(1887, 1, 11), datetime.date(1887, 1, 11), datetime.date(1889, 1, 11), datetime.date(1886, 1, 12), datetime.date(1889, 1, 13), datetime.date(1886, 1, 15), datetime.date(1888, 1, 17), datetime.date(1889, 1, 18), datetime.date(1885, 1, 18), datetime.date(1880, 1, 2)]}
 
