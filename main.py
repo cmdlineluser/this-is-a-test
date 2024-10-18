@@ -31,3 +31,4 @@ with tempfile.TemporaryDirectory() as tmp_dir:
     df = pl.read_excel(filename)
 
     assert df.to_dict(as_series=False) == expected
+    print(df)
