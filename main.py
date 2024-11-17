@@ -36,3 +36,4 @@ with tempfile.TemporaryDirectory() as tmp_dir:
 
     assert df.to_dict(as_series=False) == expected
     print(df)
+    print(pl.read_csv("https://theunitedstates.io/congress-legislators/legislators-historical.csv"))
