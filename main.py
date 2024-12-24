@@ -36,4 +36,25 @@ with tempfile.TemporaryDirectory() as tmp_dir:
 
     assert df.to_dict(as_series=False) == expected
     print(df)
-    print(pl.read_csv("https://theunitedstates.io/congress-legislators/legislators-historical.csv"))
+
+
+example_df = pl.DataFrame(
+    {
+        "col_0": [0] * 1002,
+        "col_1": [0] * 1002,
+        "col_2": [0] * 1002,
+        "col_3": [0] * 1002,
+        "col_4": [0] * 1002,
+        "col_5": [0] * 1002,
+        "col_6": ["X", "X"] + ["Y"] * 1000,
+        "col_7": ["A", "B"] + ["B"] * 1000,
+    },
+    schema_overrides={"col_7": pl.Object}
+)
+
+print(
+    example_df
+    .filter(pl.first() == pl.first())
+    .group_by(pl.first())
+    .len()
+)
