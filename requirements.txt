@@ -1,3 +1,4 @@
 polars
 xlsxwriter
 fastexcel
+duckdb
