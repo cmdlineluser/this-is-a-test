@@ -50,4 +50,4 @@ with tempfile.TemporaryDirectory() as tmp_dir:
     except:
         print("[ERROR]:", "pl.read_csv()")
     
-    print(duckdb.sql(f"""from read_csv('{str(csv_file)}', skip=1, null_padding=true)"""))
+    print(duckdb.sql(f"""from read_csv('{str(csv_file)}', header=false, skip=1, null_padding=true)"""))
