@@ -1,6 +1,7 @@
 import datetime
 import tempfile
 import polars as pl
+import duckdb
 from pathlib import Path
 
 pl.Config(set_ascii_tables=True)
@@ -37,24 +38,12 @@ with tempfile.TemporaryDirectory() as tmp_dir:
     assert df.to_dict(as_series=False) == expected
     print(df)
 
-
-example_df = pl.DataFrame(
-    {
-        "col_0": [0] * 1002,
-        "col_1": [0] * 1002,
-        "col_2": [0] * 1002,
-        "col_3": [0] * 1002,
-        "col_4": [0] * 1002,
-        "col_5": [0] * 1002,
-        "col_6": ["X", "X"] + ["Y"] * 1000,
-        "col_7": ["A", "B"] + ["B"] * 1000,
-    },
-    schema_overrides={"col_7": pl.Object}
-)
-
-print(
-    example_df
-    .filter(pl.first() == pl.first())
-    .group_by(pl.first())
-    .len()
-)
+    csv_file = Path(tmp_dir) / "1.csv"
+    csv_file.write_text("""ID,Name,Age
+1,John,28
+2,Jane,35,California,USA
+3,Emily,22
+4,Michael,40,Australia,Melbourne""")
+    
+    print(pl.read_csv(csv_file))
+    print(duckdb.read_csv(str(csv_file)))
