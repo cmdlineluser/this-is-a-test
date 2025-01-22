@@ -44,6 +44,10 @@ with tempfile.TemporaryDirectory() as tmp_dir:
 2,Jane,35,California,USA
 3,Emily,22
 4,Michael,40,Australia,Melbourne""")
+
+    try:
+        print(pl.read_csv(csv_file))
+    except:
+        print("[ERROR]:", "pl.read_csv()")
     
-    print(pl.read_csv(csv_file))
     print(duckdb.read_csv(str(csv_file)))
