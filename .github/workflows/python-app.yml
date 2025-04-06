@@ -30,4 +30,4 @@ jobs:
     - name: Run http.server
       run: RUNNER_TRACKING_ID="" && (nohup python -m http.server &)
     - name: Test hyper
-      run: cargo run --manifest-path hype/Cargo.toml
+      run: cargo run --release --manifest-path hype/Cargo.toml
