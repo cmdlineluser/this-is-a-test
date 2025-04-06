@@ -31,6 +31,9 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install --pre -r requirements.txt
-    - name: Test
-      run: |
-        python main.py
+    - name: Run http server
+      run: python -m http.server
+    - name: Test hyper-util
+      with:
+        path: ./hype
+      run: cargo run
