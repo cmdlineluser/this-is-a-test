@@ -30,4 +30,4 @@ jobs:
     - name: Install dependencies
       with:
         path: ./hype
-        run: cargo run
+      run: cargo run
