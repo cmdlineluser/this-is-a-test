@@ -28,14 +28,4 @@ jobs:
       with:
         python-version: "3.10"
     - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install --pre -r requirements.txt
-    - name: Run http server
-    - uses: actions/checkout@v4
-    - run: python -m http.server
-    - name: Test hyper-util
-    - uses: actions/checkout@v4
-      with:
-        path: ./hype
-    - run: cargo run
+      run: cargo run
