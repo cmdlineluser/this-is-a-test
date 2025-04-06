@@ -28,7 +28,4 @@ jobs:
       with:
         python-version: "3.10"
     - name: Install dependencies
-    - uses: actions/checkout@v4
-      with:
-        path: ./hype
-      run: cargo run
+      run: cargo run --mainfest-path hype/Cargo.toml
