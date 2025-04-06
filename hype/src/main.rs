@@ -6,7 +6,7 @@ use hyper_util::client::legacy::{connect::HttpConnector, Client};
 
 #[tokio::main(flavor = "current_thread")]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let url = "http://127.0.0.1:10000/1.parquet".parse::<hyper::Uri>()?;
+    let url = "http://127.0.0.1:8000/1.parquet".parse::<hyper::Uri>()?;
     let client = Client::builder(hyper_util::rt::TokioExecutor::new()).build(HttpConnector::new());
 
     let req = Request::builder()
