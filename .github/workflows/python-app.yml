@@ -18,6 +18,8 @@ jobs:
     runs-on: macos-13
 
     steps:
+    - name: Check uname
+      run: uname -a
     - name: Temporarily modify the rust toolchain version
       run: rustup override set nightly
     - name: Output rust version for educational purposes
