@@ -32,8 +32,10 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install --pre -r requirements.txt
     - name: Run http server
-      run: python -m http.server
+    - uses: actions/checkout@v4
+    - run: python -m http.server
     - name: Test hyper-util
+    - uses: actions/checkout@v4
       with:
         path: ./hype
-      run: cargo run
+    - run: cargo run
