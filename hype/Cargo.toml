@@ -1,0 +1,10 @@
+[package]
+name = "hype"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+hyper = { version = "1", features = ["client", "http1"] }
+tokio = { version = "1", features = ["macros", "net"] }
+hyper-util = { version = "0.1", features = ["client-legacy", "http1"] }
+http-body-util = "0.1"
