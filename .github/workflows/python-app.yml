@@ -29,7 +29,5 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: "3.10"
-    - name: Run http.server
-      run: RUNNER_TRACKING_ID="" && (nohup python -m http.server &)
-    - name: Test hyper
-      run: cargo run --release --manifest-path hype/Cargo.toml
+    - name: Test Polars
+      run: python3 main.py
