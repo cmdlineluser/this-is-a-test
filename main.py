@@ -37,17 +37,3 @@ with tempfile.TemporaryDirectory() as tmp_dir:
 
     assert df.to_dict(as_series=False) == expected
     print(df)
-
-    csv_file = Path(tmp_dir) / "1.csv"
-    csv_file.write_text("""ID,Name,Age
-1,John,28
-2,Jane,35,California,USA
-3,Emily,22
-4,Michael,40,Australia,Melbourne""")
-
-    try:
-        print(pl.read_csv(csv_file))
-    except:
-        print("[ERROR]:", "pl.read_csv()")
-    
-    print(duckdb.sql(f"""from read_csv('{str(csv_file)}', sep=',', header=false, skip=1, null_padding=true)"""))
