@@ -27,4 +27,4 @@ jobs:
       uses: astral-sh/setup-uv@v6
     - name: Yolo
       run: |
-        uv
+        uv run --isolated --with "polars==1.34.0b2" --with "polars-runtime-32==1.34.0b2" python3 -c 'print(__import__("polars").DataFrame())'
