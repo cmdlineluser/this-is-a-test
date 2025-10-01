@@ -6,34 +6,33 @@ from pathlib import Path
 
 pl.Config(set_ascii_tables=True)
 
-expected = {'date_of_birth': [datetime.date(1887, 1, 11), datetime.date(1887, 1, 11), datetime.date(1889, 1, 11), datetime.date(1886, 1, 12), datetime.date(1889, 1, 13), datetime.date(1886, 1, 15), datetime.date(1888, 1, 17), datetime.date(1889, 1, 18), datetime.date(1885, 1, 18), datetime.date(1880, 1, 2)]}
+# 1. Create the problematic file for demonstration
+file_content = "col_a\tcol_b\tcol_c"
+file_path = "test.txt"
+with open(file_path, "w", encoding="cp932") as f:
+    f.write(file_content)
 
-with tempfile.TemporaryDirectory() as tmp_dir:
+# 2. Define parameters based on the failing use case
+# A non-empty list of columns, as confirmed by debugging
+header_list = ['セット親コード', 'セット親年月号', 'セット名', '本体価格', '点数', '冊数', '荷姿', 'NO', '書誌ｺｰﾄﾞ', '年月号・枝', '書名', '構成数', '取引コード']
 
-    filename = Path(tmp_dir) / "1.xlsx"
+# Using pl.Utf8 as a representative dtype for reproduction
+field_types = {name: pl.Utf8 for name in header_list}
 
-    (pl.from_repr("""
-    ┌────────────────┐
-    │ date_of_birth  │
-    │ ---            │
-    │ str            │
-    ╞════════════════╡
-    │ 1/11/1887      │
-    │ 1/11/1887      │
-    │ 1/11/1889      │
-    │ 1/12/1886      │
-    │ 1/13/1889      │
-    │ 1/15/1886      │
-    │ 1/17/1888      │
-    │ 1/18/1889      │
-    │ 1/18/1885      │
-    │ 1/2/1880       │    
-    └────────────────┘
-    """)
-    .with_columns(pl.col.date_of_birth.str.to_date("%m/%d/%Y"))
-    .write_excel(filename))
+print(f"Attempting to read a single-line file ('{file_path}') with skip_rows=1...")
+print(f"Polars version: {pl.__version__}")
+print(f"Columns to be created (len: {len(header_list)}): {header_list}")
 
-    df = pl.read_excel(filename)
-
-    assert df.to_dict(as_series=False) == expected
-    print(df)
+df = pl.read_csv(
+        file_path,
+        encoding="cp932",
+        separator="\t",
+        has_header=False,
+        skip_rows=1,
+        new_columns=header_list,
+        dtypes=field_types,
+        raise_if_empty=False, # This should prevent errors on empty data
+        quote_char=None,
+    )
+print("\nSUCCESS: An empty DataFrame was created as expected.")
+print(df)
