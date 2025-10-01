@@ -1,7 +1,7 @@
 import datetime
 import tempfile
 import polars as pl
-import duckdb
+import os
 from pathlib import Path
 
 pl.Config(set_ascii_tables=True)
