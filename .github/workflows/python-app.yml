@@ -19,6 +19,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v5
+    - name: Install ffmpeg
+      run: apt-get install ffmpeg
     - name: Set up Python 3.12
       uses: actions/setup-python@v3
       with:
