@@ -2,27 +2,11 @@ from pathlib import Path
 import tempfile
 import subprocess
 
+ffmpeg = r'C:\Users\runneradmin\AppData\Local/Microsoft/WinGet/Links/ffmpeg.exe'
+ffmpeg = 'ffmpeg'
 with tempfile.TemporaryDirectory() as tmpdir:
-    source_video_path = (Path(tmpdir) / "m@~[]\"y'fi:le is 'here.mkv")
-    subprocess.run(
-[
-'ffmpeg',
-'-f',
-'lavfi',
-'-i',
-'smptehdbars=s=1920x1080:r=25,format=yuv420p',
- '-c:v', 
-'libx264',
-'-b:v',
-'3500k',
-'-crf:v',
-'23',
-'-t', 
-'10',
-'-y',
-str(source_video_path)
-]
-)
+    filename = "m@~[]y'file is 'here.mkv"
+    source_video_path = (Path(tmpdir) / filename)
 
     #source_video_path.write_text("Hello!")
     subtitle_path = source_video_path.with_suffix('.srt')
@@ -35,13 +19,11 @@ str(source_video_path)
 
     # The subtitle path is formatted for the filter string
     # NOTE: My real code finds this path dynamically.
-    #formatted_subtitle_path = str(subtitle_path).replace('\\', '/')
-    #formatted_subtitle_path = formatted_subtitle_path.replace(":", r"\\\:")
-    #formatted_subtitle_path = str(subtitle_path)
-    #formatted_subtitle_path = formatted_subtitle_path.replace("'", r"\\\'")
-    #formatted_subtitle_path = formatted_subtitle_path.replace(" ", r"\\ ")
+    escaped_filename = str(filename).replace("\\", "/")
+    for char in "~@'[]:":
+        escaped_filename = escaped_filename.replace(char, rf"\\\{char}")
     formatted_subtitle_path = str(subtitle_path).replace("\\", "/")
-    for char in "'[]:":
+    for char in "[]':":
         formatted_subtitle_path = formatted_subtitle_path.replace(char, rf"\\\{char}")
 
 
@@ -52,9 +34,27 @@ str(source_video_path)
     #video_filter += f',subtitles=filename="{formatted_subtitle_path}":force_style={style_string}'
     video_filter += f',subtitles=filename={formatted_subtitle_path}:force_style={style_string}'
 
+    subprocess.run([
+        ffmpeg,
+        '-f',
+        'lavfi',
+        '-i',
+        'smptehdbars=s=1920x1080:r=25,format=yuv420p',
+         '-c:v', 
+        'libx264',
+        '-b:v',
+        '3500k',
+        '-crf:v',
+        '23',
+        '-t', 
+        '10',
+        '-y',
+        str(source_video_path)
+    ])
+
     # --- The final ffmpeg command list ---
     command = [
-        'ffmpeg',
+            ffmpeg,
         '-y',
         '-i', str(source_video_path),
         '-vf', video_filter,
