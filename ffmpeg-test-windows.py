@@ -32,7 +32,7 @@ with tempfile.TemporaryDirectory() as tmpdir:
     #video_filter += f',subtitles=filename="{formatted_subtitle_path}":force_style={style_string}'
     video_filter += f',subtitles=filename={formatted_subtitle_path}:force_style={style_string}'
 
-        subprocess.run(
+    subprocess.run(
 [
 r'C:\Users\runneradmin\AppData\Local/Microsoft/WinGet/Links/ffmpeg.exe',
 '-f',
