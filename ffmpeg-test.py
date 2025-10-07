@@ -23,7 +23,7 @@ with tempfile.TemporaryDirectory() as tmpdir:
 
     # --- The final ffmpeg command list ---
     command = [
-        'ffmpeg.exe',
+        'ffmpeg',
         '-y',
         '-i', str(source_video_path),
         '-vf', video_filter,
