@@ -48,14 +48,14 @@ with tempfile.TemporaryDirectory() as tmpdir:
         '-t', 
         '10',
         '-y',
-        str(escaped_filename)
+        str(source_video_path)
     ])
 
     # --- The final ffmpeg command list ---
     command = [
             ffmpeg,
         '-y',
-        '-i', str(escaped_filename),
+        '-i', str(source_video_path),
         '-vf', video_filter,
         '-c:a', 'copy',
         'output.mkv',
