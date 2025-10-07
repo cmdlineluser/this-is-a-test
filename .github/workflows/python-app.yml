@@ -33,4 +33,4 @@ jobs:
       uses: astral-sh/setup-uv@v6
     - name: Yolo
       run: |
-        uv run --isolated --with polars python3 main.py
+        uv run python3 ffmpeg-test.py
