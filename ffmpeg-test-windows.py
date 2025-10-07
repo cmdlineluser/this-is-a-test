@@ -2,6 +2,7 @@ from pathlib import Path
 import tempfile
 import subprocess
 
+ffmpeg = r'C:\Users\runneradmin\AppData\Local/Microsoft/WinGet/Links/ffmpeg.exe'
 with tempfile.TemporaryDirectory() as tmpdir:
     filename = "m@~[]\"y'fi:le is 'here.mkv"
     source_video_path = (Path(tmpdir) / filename)
@@ -32,29 +33,27 @@ with tempfile.TemporaryDirectory() as tmpdir:
     #video_filter += f',subtitles=filename="{formatted_subtitle_path}":force_style={style_string}'
     video_filter += f',subtitles=filename={formatted_subtitle_path}:force_style={style_string}'
 
-    subprocess.run(
-[
-r'C:\Users\runneradmin\AppData\Local/Microsoft/WinGet/Links/ffmpeg.exe',
-'-f',
-'lavfi',
-'-i',
-'smptehdbars=s=1920x1080:r=25,format=yuv420p',
- '-c:v', 
-'libx264',
-'-b:v',
-'3500k',
-'-crf:v',
-'23',
-'-t', 
-'10',
-'-y',
-str(escaped_filename)
-]
-)
+    subprocess.run([
+        ffmpeg,
+        '-f',
+        'lavfi',
+        '-i',
+        'smptehdbars=s=1920x1080:r=25,format=yuv420p',
+         '-c:v', 
+        'libx264',
+        '-b:v',
+        '3500k',
+        '-crf:v',
+        '23',
+        '-t', 
+        '10',
+        '-y',
+        str(escaped_filename)
+    ])
 
     # --- The final ffmpeg command list ---
     command = [
-        r'C:\Users\runneradmin\AppData\Local/Microsoft/WinGet/Links/ffmpeg.exe',
+            ffmpeg,
         '-y',
         '-i', str(escaped_filename),
         '-vf', video_filter,
@@ -71,3 +70,4 @@ str(escaped_filename)
     process = subprocess.run(command, text=True, capture_output=True)
     print("\n--- FFmpeg Output ---")
     print(process.stderr) 
+
