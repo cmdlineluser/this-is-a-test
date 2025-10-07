@@ -19,10 +19,10 @@ with tempfile.TemporaryDirectory() as tmpdir:
     # The subtitle path is formatted for the filter string
     # NOTE: My real code finds this path dynamically.
     escaped_filename = str(filename).replace("\\", "/")
-    for char in "'[]:":
+    for char in "~@'[]:":
         escaped_filename = escaped_filename.replace(char, rf"\\\{char}")
     formatted_subtitle_path = str(subtitle_path).replace("\\", "/")
-    for char in "'[]:":
+    for char in "~@'[]:":
         formatted_subtitle_path = formatted_subtitle_path.replace(char, rf"\\\{char}")
 
 
