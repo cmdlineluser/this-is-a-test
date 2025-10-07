@@ -42,7 +42,7 @@ str(source_video_path)
     style_string = "FontName=Segoe UI,FontSize=18,PrimaryColour=&H00FFFFFF"
 
     # The filename is placed inside single quotes in the filter
-    video_filter += f",subtitles=filename='{formatted_subtitle_path}':force_style='{style_string}'"
+    video_filter += f",subtitles=filename={formatted_subtitle_path}:force_style={style_string}"
 
     # --- The final ffmpeg command list ---
     command = [
