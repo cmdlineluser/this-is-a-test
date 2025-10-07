@@ -3,8 +3,36 @@ import tempfile
 import subprocess
 
 with tempfile.TemporaryDirectory() as tmpdir:
-    source_video_path = (Path(tmpdir) / "m@~[]\"y'fi:le is 'here.mkv")
-    subprocess.run(
+    filename = "m@~[]\"y'fi:le is 'here.mkv"
+    source_video_path = (Path(tmpdir) / filename)
+
+    #source_video_path.write_text("Hello!")
+    subtitle_path = source_video_path.with_suffix('.srt')
+    subtitle_path.write_text("""1
+00:00:02,000 --> 00:00:05,120
+<font color="#ffffffff">This programme contains some</font>
+    """)
+    
+    video_filter = 'crop=1920:800:0:140' # Example starting filter
+
+    # The subtitle path is formatted for the filter string
+    # NOTE: My real code finds this path dynamically.
+    escaped_filename = str(filename).replace("\\", "/")
+    for char in "'[]:":
+        escaped_filename = escaped_filename.replace(char, rf"\\\{char}")
+    formatted_subtitle_path = str(subtitle_path).replace("\\", "/")
+    for char in "'[]:":
+        formatted_subtitle_path = formatted_subtitle_path.replace(char, rf"\\\{char}")
+
+
+    # A simplified version of my style loop
+    style_string = r"'FontName=Segoe UI,FontSize=18,PrimaryColour=&H00FFFFFF'"
+
+    # The filename is placed inside single quotes in the filter
+    #video_filter += f',subtitles=filename="{formatted_subtitle_path}":force_style={style_string}'
+    video_filter += f',subtitles=filename={formatted_subtitle_path}:force_style={style_string}'
+
+        subprocess.run(
 [
 r'C:\Users\runneradmin\AppData\Local/Microsoft/WinGet/Links/ffmpeg.exe',
 '-f',
@@ -20,39 +48,15 @@ r'C:\Users\runneradmin\AppData\Local/Microsoft/WinGet/Links/ffmpeg.exe',
 '-t', 
 '10',
 '-y',
-str(source_video_path)
+str(escaped_filename)
 ]
 )
-
-    #source_video_path.write_text("Hello!")
-    subtitle_path = source_video_path.with_suffix('.srt')
-    subtitle_path.write_text("""1
-00:00:02,000 --> 00:00:05,120
-<font color="#ffffffff">This programme contains some</font>
-    """)
-    
-    video_filter = 'crop=1920:800:0:140' # Example starting filter
-
-    # The subtitle path is formatted for the filter string
-    # NOTE: My real code finds this path dynamically.
-    formatted_subtitle_path = str(subtitle_path).replace('\\', '/')
-    formatted_subtitle_path = formatted_subtitle_path.replace(":", r"\\\:")
-    #formatted_subtitle_path = str(subtitle_path)
-    formatted_subtitle_path = formatted_subtitle_path.replace("'", r"\\\'")
-    #formatted_subtitle_path = formatted_subtitle_path.replace(" ", r"\\ ")
-
-    # A simplified version of my style loop
-    style_string = r"'FontName=Segoe UI,FontSize=18,PrimaryColour=&H00FFFFFF'"
-
-    # The filename is placed inside single quotes in the filter
-    #video_filter += f',subtitles=filename="{formatted_subtitle_path}":force_style={style_string}'
-    video_filter += f',subtitles=filename={formatted_subtitle_path}:force_style={style_string}'
 
     # --- The final ffmpeg command list ---
     command = [
         r'C:\Users\runneradmin\AppData\Local/Microsoft/WinGet/Links/ffmpeg.exe',
         '-y',
-        '-i', str(source_video_path),
+        '-i', str(escaped_filename),
         '-vf', video_filter,
         '-c:a', 'copy',
         'output.mkv',
