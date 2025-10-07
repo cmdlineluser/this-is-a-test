@@ -26,7 +26,10 @@ str(source_video_path)
 
     #source_video_path.write_text("Hello!")
     subtitle_path = source_video_path.with_suffix('.srt')
-    subtitle_path.write_text("World!")
+    subtitle_path.write_text("""1
+00:00:02,000 --> 00:00:05,120
+<font color="#ffffffff">This programme contains some</font>
+    """)
     
     video_filter = 'crop=1920:800:0:140' # Example starting filter
 
