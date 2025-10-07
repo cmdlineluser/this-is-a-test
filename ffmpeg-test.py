@@ -39,7 +39,7 @@ str(source_video_path)
     formatted_subtitle_path = formatted_subtitle_path.replace(":", r"\\\:")
     #formatted_subtitle_path = str(subtitle_path)
     formatted_subtitle_path = formatted_subtitle_path.replace("'", r"\\\'")
-    formatted_subtitle_path = formatted_subtitle_path.replace(" ", r"\\ ")
+    #formatted_subtitle_path = formatted_subtitle_path.replace(" ", r"\\ ")
 
     # A simplified version of my style loop
     style_string = r"'FontName=Segoe UI,FontSize=18,PrimaryColour=&H00FFFFFF'"
