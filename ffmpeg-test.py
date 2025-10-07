@@ -35,9 +35,9 @@ str(source_video_path)
 
     # The subtitle path is formatted for the filter string
     # NOTE: My real code finds this path dynamically.
-    #formatted_subtitle_path = str(subtitle_path).replace('\\', '/')
+    formatted_subtitle_path = str(subtitle_path).replace('\\', '/')
     #formatted_subtitle_path = str(subtitle_path)
-    formatted_subtitle_path = str(subtitle_path).replace("'", r"\\\'")
+    formatted_subtitle_path = formatted_subtitle_path.replace("'", r"\\\'")
     formatted_subtitle_path = formatted_subtitle_path.replace(" ", r"\\ ")
 
     # A simplified version of my style loop
