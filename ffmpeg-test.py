@@ -6,7 +6,7 @@ with tempfile.TemporaryDirectory() as tmpdir:
     source_video_path = (Path(tmpdir) / "my'file is 'here.mkv")
     subprocess.run(
 [
-'ffmpeg',
+r'C:\Users\runneradmin\AppData\Local/Microsoft/WinGet/Links/ffmpeg.exe',
 '-f',
 'lavfi',
 '-i',
