@@ -1,6 +1,7 @@
 from pathlib import Path
 import tempfile
 import subprocess
+import shlex
 
 ffmpeg = r'C:\Users\runneradmin\AppData\Local/Microsoft/WinGet/Links/ffmpeg.exe'
 with tempfile.TemporaryDirectory() as tmpdir:
@@ -24,6 +25,7 @@ with tempfile.TemporaryDirectory() as tmpdir:
     formatted_subtitle_path = str(subtitle_path).replace("\\", "/")
     for char in "[]':":
         formatted_subtitle_path = formatted_subtitle_path.replace(char, rf"\\\{char}")
+    formatted_subtitle_path = shlex.quote(subtitle_path)
 
 
     # A simplified version of my style loop
