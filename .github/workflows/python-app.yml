@@ -24,7 +24,7 @@ jobs:
     - name: FFMPEG_ROOT Windows
       run: echo "FFMPEG_ROOT=$env:LOCALAPPDATA/Microsoft/WinGet/Links/" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
     - name: Print stuff
-      run: dir LOCALAPPDATA/Microsoft/WinGet/Links/
+      run: dir C:/FFMPEG
       
     - name: Test ffmpeg
       run: ffmpeg
