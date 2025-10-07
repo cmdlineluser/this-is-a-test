@@ -40,7 +40,7 @@ str(source_video_path)
     formatted_subtitle_path = str(subtitle_path).replace("'", r"\\\'")
 
     # A simplified version of my style loop
-    style_string = r"\\\'FontName=Segoe UI,FontSize=18,PrimaryColour=&H00FFFFFF\\\'"
+    style_string = r"'FontName=Segoe UI,FontSize=18,PrimaryColour=&H00FFFFFF'"
 
     # The filename is placed inside single quotes in the filter
     video_filter += f",subtitles=filename={formatted_subtitle_path}:force_style={style_string}"
