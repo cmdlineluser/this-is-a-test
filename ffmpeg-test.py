@@ -4,7 +4,27 @@ import subprocess
 
 with tempfile.TemporaryDirectory() as tmpdir:
     source_video_path = (Path(tmpdir) / "my'file is 'here.mkv")
-    source_video_path.write_text("Hello!")
+    subprocess.run(
+[
+'ffmpeg',
+'-f',
+'lavfi',
+'-i',
+'smptehdbars=s=1920x1080:r=25,format=yuv420p',
+ '-c:v', 
+'libx264',
+'-b:v',
+'3500k',
+'-crf:v',
+'23',
+'-t', 
+'10',
+'-y',
+str(source_video_path)
+]
+)
+
+    #source_video_path.write_text("Hello!")
     subtitle_path = source_video_path.with_suffix('.srt')
     subtitle_path.write_text("World!")
     
