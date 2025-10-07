@@ -25,8 +25,7 @@ with tempfile.TemporaryDirectory() as tmpdir:
     formatted_subtitle_path = str(subtitle_path).replace("\\", "/")
     for char in "[]':":
         formatted_subtitle_path = formatted_subtitle_path.replace(char, rf"\\\{char}")
-    formatted_subtitle_path = shlex.quote(subtitle_path)
-
+    formatted_subtitle_path = shlex.quote(str(subtitle_path))
 
     # A simplified version of my style loop
     style_string = r"'FontName=Segoe UI,FontSize=18,PrimaryColour=&H00FFFFFF'"
