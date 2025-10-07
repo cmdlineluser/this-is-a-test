@@ -3,7 +3,7 @@ import tempfile
 import subprocess
 
 with tempfile.TemporaryDirectory() as tmpdir:
-    source_video_path = (Path(tmpdir) / "my'file is 'here.mkv")
+    source_video_path = (Path(tmpdir) / "m@~[]\"y'fi:le is 'here.mkv")
     subprocess.run(
 [
 'ffmpeg',
