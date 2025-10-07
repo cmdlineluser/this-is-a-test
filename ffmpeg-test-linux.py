@@ -5,7 +5,7 @@ import subprocess
 ffmpeg = r'C:\Users\runneradmin\AppData\Local/Microsoft/WinGet/Links/ffmpeg.exe'
 ffmpeg = 'ffmpeg'
 with tempfile.TemporaryDirectory() as tmpdir:
-    filename = "m@~[]y'file is 'here.mkv"
+    filename = "m@~[]y'file %^ is 'here.mkv"
     source_video_path = (Path(tmpdir) / filename)
 
     #source_video_path.write_text("Hello!")
