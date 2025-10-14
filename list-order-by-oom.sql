@@ -2,7 +2,7 @@ set preserve_insertion_order = false;
 
 copy (
   with
-    dates as (select unnest(generate_series(date '2010-01-01', date '2010-8-01', interval '1 day')) as days),
+    dates as (select unnest(generate_series(date '2010-01-01', date '2010-12-01', interval '1 day')) as days),
     ids   as (select unnest(generate_series(1, 100_000)) as id)
   from dates, ids
   select
