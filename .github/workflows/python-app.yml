@@ -28,6 +28,6 @@ jobs:
     - name: Install DuckDB
       run:
         curl https://install.duckdb.org | sh
-    - name: Yolo
-      run: |
-        uv run python3 main.py
+    - name: Run DuckDB
+      run:
+        /home/runner/.duckdb/cli/latest/duckdb < list-order-by-oom.sql
