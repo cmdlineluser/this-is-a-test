@@ -28,6 +28,9 @@ jobs:
     - name: Install DuckDB
       run:
         curl https://install.duckdb.org | sh
+    - name: RAM
+      run:
+        free -g
     - name: Run DuckDB
       run:
         /home/runner/.duckdb/cli/latest/duckdb < list-order-by-oom.sql
