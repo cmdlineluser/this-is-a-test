@@ -2,6 +2,7 @@ import urllib.request
 import zipfile
 import sys
 import os
+import io
 import polars as pl
 
 url = "https://github.com/user-attachments/files/22982158/polars_bug_data_before_panic.zip"
