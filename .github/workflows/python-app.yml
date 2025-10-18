@@ -17,7 +17,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    steps:   
+    steps:
     - uses: actions/checkout@v5
     - name: Set up Python 3.12
       uses: actions/setup-python@v3
@@ -25,12 +25,6 @@ jobs:
         python-version: "3.12"
     - name: Install uv
       uses: astral-sh/setup-uv@v6
-    - name: Install DuckDB
-      run:
-        curl https://install.duckdb.org | sh
-    - name: RAM
-      run:
-        free -g
-    - name: Run DuckDB
-      run:
-        /home/runner/.duckdb/cli/latest/duckdb < list-order-by-oom.sql
+    - name: Yolo
+      run: |
+        uv run --isolated --with "polars==1.34.0b3" --with "polars-runtime-32==1.34.0b3" python3 -c 'print(__import__("polars").DataFrame())'
