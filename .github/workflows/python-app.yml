@@ -25,6 +25,9 @@ jobs:
         python-version: "3.12"
     - name: Install uv
       uses: astral-sh/setup-uv@v6
-    - name: Yolo
+    - name: Install Polars
       run: |
-        uv run --with polars python3 polars-panic.py
+        python3 -m pip install polars
+    - name: Test
+      run: |
+        python3 polars-panic.py
