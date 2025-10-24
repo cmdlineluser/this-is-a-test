@@ -1,5 +1,5 @@
 import os
-#os.environ["POLARS_MAX_THREADS"] = "8"
+os.environ["POLARS_MAX_THREADS"] = "8"
 import polars as pl
 import numpy as np
 import datetime
