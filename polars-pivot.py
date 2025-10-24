@@ -1,8 +1,12 @@
 import os
+
 os.environ["POLARS_MAX_THREADS"] = "8"
+
 import polars as pl
 import numpy as np
 import datetime
+
+pl.Config(set_ascii_tables=True)
 
 # Parameters
 n_codes = 400
