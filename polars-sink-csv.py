@@ -10,7 +10,7 @@ with open("1.ndjson", "w") as f:
   
 # Read with Polars
 lf = pl.scan_ndjson("1.ndjson")
-lf.select("html").sink_csv("1.csv",
+lf.select(pl.col("html").str.strip_chars_end("\n")).sink_csv("1.csv",
                            include_header=False,
                            maintain_order=True,
                            quote_style="never",
