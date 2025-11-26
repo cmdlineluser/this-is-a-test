@@ -27,7 +27,7 @@ jobs:
       uses: astral-sh/setup-uv@v6
     - name: Install Polars
       run: |
-        python3 -m pip install polars numpy
+        python3 -m pip install polars numpy requests
     - name: Test
       run: |
         python3 polars-sink-csv.py
