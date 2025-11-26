@@ -30,4 +30,4 @@ jobs:
         python3 -m pip install polars numpy
     - name: Test
       run: |
-        python3 polars-pivot.py
+        python3 polars-sink-csv.py
