@@ -25,4 +25,4 @@ lf.select("html").sink_csv(outTxt,
 
 with open(outNdjson, "rb") as f:
   for row in f:
-    print(repr(row))
+    print(repr(row[-10:]))
